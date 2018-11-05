@@ -13,3 +13,28 @@
 </li>
 */
 // After the loop print the HTML into <ul> element using innerHTML.
+
+const showImages = () => {
+  const ul = document.querySelector('ul');
+
+  fetch('./images.json').then(result => result.json().then(json => {
+    const html = [];
+
+    json.forEach(image => {
+      html.push(`
+        <li>
+          <figure>
+            <a href="img/original/${image.mediaUrl}"><img src="img/thumbs/${image.mediaUrl}"></a>
+            <figcaption>
+              <h3>${image.mediaTitle}</h3>
+            </figcaption>
+          </figure>
+        </li>
+      `);
+    });
+
+    ul.innerHTML = html.join('');
+  }));
+};
+
+showImages();
